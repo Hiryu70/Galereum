@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace Galereum
 {
-	public class Row : PictureBase, IStackable
+	public class Column : PictureBase, IStackable
 	{
 		private List<IPicture> _pictures = new List<IPicture>();
 
 		public override float GetRatio()
 		{
-			return _pictures.Sum(x => x.GetRatio());
+			return 1 / _pictures.Sum(x => 1 / x.GetRatio());
 		}
 
 		public void Add(IPicture picture)
@@ -25,17 +25,17 @@ namespace Galereum
 
 		public override Bitmap GetBitmapWithWidth(int width)
 		{
-			var overallHeight = (int)(width / GetRatio());
+			var ovarallHeight = (int)(width / GetRatio());
 
-			var bitmap = new Bitmap(width, overallHeight);
+			var bitmap = new Bitmap(width, ovarallHeight);
 			using (var g = Graphics.FromImage(bitmap))
 			{
-				var localWidth = 0;
+				var localHeight = 0;
 				foreach (var picture in _pictures)
 				{
-					var resizedImage = picture.GetBitmapWithHeight(overallHeight);
-					g.DrawImage(resizedImage, localWidth, 0);
-					localWidth += resizedImage.Width;
+					var resizedImage = picture.GetBitmapWithWidth(width);
+					g.DrawImage(resizedImage, 0, localHeight);
+					localHeight += resizedImage.Height;
 				}
 			}
 
