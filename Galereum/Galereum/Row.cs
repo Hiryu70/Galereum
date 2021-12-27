@@ -20,7 +20,21 @@ namespace Galereum
 
 		public override Bitmap GetBitmapWithHeight(int height)
 		{
-			throw new System.NotImplementedException();
+			var overallWidth = (int)(height * GetRatio());
+
+			var bitmap = new Bitmap(overallWidth, height);
+			using (var g = Graphics.FromImage(bitmap))
+			{
+				var localWidth = 0;
+				foreach (var picture in _pictures)
+				{
+					var resizedImage = picture.GetBitmapWithHeight(height);
+					g.DrawImage(resizedImage, localWidth, 0);
+					localWidth += resizedImage.Width;
+				}
+			}
+
+			return bitmap;
 		}
 
 		public override Bitmap GetBitmapWithWidth(int width)

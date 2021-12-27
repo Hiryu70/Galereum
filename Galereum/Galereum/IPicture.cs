@@ -5,13 +5,7 @@ namespace Galereum
 	public interface IPicture
 	{
 		/// <summary>
-		/// Отношение ширины к высоте
-		/// +---+---+---+---+
-		/// | 1 | 2 | 3 | 4 |
-		/// +---+---+---+---+
-		/// | 2 |   |   |   |
-		/// +---+---+---+---+
-		/// Ratio = 2
+		/// Отношение ширины к высоте w(4)/h(2) = 2
 		/// </summary>
 		/// <returns></returns>
 		float GetRatio();
