@@ -12,6 +12,16 @@ namespace Galereum
 
 		public abstract float GetRatio();
 
+		protected int GetWidthByHeight(int height)
+		{
+			return (int)(height * GetRatio());
+		}
+
+		protected int GetHeightByWidth(int width)
+		{
+			return (int)(width / GetRatio());
+		}
+
 		protected static Bitmap ResizeImage(Image image, int width, int height)
 		{
 			var destRect = new Rectangle(0, 0, width, height);

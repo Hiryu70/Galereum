@@ -20,27 +20,19 @@ namespace Galereum
 
 		public override Bitmap GetBitmapWithHeight(int height)
 		{
-			var overallWidth = (int)(height * GetRatio());
-			var bitmap = new Bitmap(overallWidth, height);
-			using (var g = Graphics.FromImage(bitmap))
-			{
-				var localHeight = 0;
-				foreach (var picture in _pictures)
-				{
-					var resizedImage = picture.GetBitmapWithWidth(overallWidth);
-					g.DrawImage(resizedImage, 0, localHeight);
-					localHeight += resizedImage.Height;
-				}
-			}
-
-			return bitmap;
+			var width = GetWidthByHeight(height);
+			return GetColumnBitmap(width, height);
 		}
 
 		public override Bitmap GetBitmapWithWidth(int width)
 		{
-			var ovarallHeight = (int)(width / GetRatio());
+			var height = GetHeightByWidth(width);
+			return GetColumnBitmap(width, height);
+		}
 
-			var bitmap = new Bitmap(width, ovarallHeight);
+		private Bitmap GetColumnBitmap(int width, int height)
+		{
+			var bitmap = new Bitmap(width, height);
 			using (var g = Graphics.FromImage(bitmap))
 			{
 				var localHeight = 0;
@@ -51,7 +43,6 @@ namespace Galereum
 					localHeight += resizedImage.Height;
 				}
 			}
-
 			return bitmap;
 		}
 	}

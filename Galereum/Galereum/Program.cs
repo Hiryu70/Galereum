@@ -24,10 +24,17 @@ namespace Galereum
 			var row = new Row();
 			row.Add(picture1);
 			row.Add(column1);
-			row.Add(picture2);
-			row.Add(column2);
-			row.Add(picture3);
-			row.GetBitmapWithWidth(1000).Save("result.jpg", ImageFormat.Jpeg);
+
+			var row2 = new Row();
+			row2.Add(picture2);
+			row2.Add(column2);
+			row2.Add(picture3);
+
+			var column3 = new Column();
+			column3.Add(row);
+			column3.Add(row2);
+
+			column3.GetBitmapWithWidth(1500).Save("result.jpg", ImageFormat.Jpeg);
 		}
 	}
 }
