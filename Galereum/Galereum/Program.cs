@@ -8,6 +8,26 @@ namespace Galereum
 	{
 		static void Main(string[] args)
 		{
+			var row = new Row();
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));			
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
+
+			for (int i = 1000; i<=1030; i++)
+            {
+				row.GetBitmapWithWidth(i).Save($"{i}.jpg", ImageFormat.Jpeg);
+            }
+		}
+
+		private void Test1()
+        {
 			var column1 = new Column();
 			column1.Add(new Picture(Image.FromFile("Images\\1.jpg")));
 			column1.Add(new Picture(Image.FromFile("Images\\2.jpg")));
