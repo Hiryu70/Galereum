@@ -1,50 +1,96 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
 
 namespace Galereum
 {
-	public class Row : PictureBase, IStackable
+	public class Row : PictureCollectionBase
 	{
-		private List<IPicture> _pictures = new List<IPicture>();
-
 		public override float GetRatio()
 		{
 			return _pictures.Sum(x => x.GetRatio());
 		}
 
-		public void Add(IPicture picture)
-		{
-			_pictures.Add(picture);
-		}
+        protected override Bitmap GetCollectionBitmap(int width, int height)
+        {
+            ResizeImages(height);
 
-		public override Bitmap GetBitmapWithHeight(int height)
-		{
-			var width = GetWidthByHeight(height);
-			return GetRowBitmap(width, height);
-		}
+            CorrectImagesToFitArea(width);
 
-		public override Bitmap GetBitmapWithWidth(int width)
-		{
-			var height = GetHeightByWidth(width);
-			return GetRowBitmap(width, height);
-		}
+            return DrawPictures(width, height);
+        }
 
-		private Bitmap GetRowBitmap(int width, int height)
-		{
-			var bitmap = new Bitmap(width, height);
-			using (var g = Graphics.FromImage(bitmap))
-			{
-				var localWidth = 0;
-				foreach (var picture in _pictures)
-				{
-					var resizedImage = picture.GetBitmapWithHeight(height);
-					g.DrawImage(resizedImage, localWidth, 0);
-					localWidth += resizedImage.Width;
-				}
-			}
+        protected override void DrawImage(Graphics g, Bitmap resizedImage, int localCoord)
+        {
+            g.DrawImage(resizedImage, localCoord, 0);
+        }
 
-			return bitmap;
-		}
-	}
+        protected override int ChangeCoord(Bitmap resizedImage, int localCoord)
+        {
+            return localCoord += resizedImage.Width;
+        }
+
+        private void CorrectImagesToFitArea(int width)
+        {
+            var sumWidth = _pictures.Sum(x => x.GetResizedWidth());
+            var differencePix = width - sumWidth;
+            var i = 0;
+            while (differencePix != 0)
+            {
+                var resizedWidth = _pictures[i].GetResizedWidth();
+                _pictures[i].SetResizedWidth(++resizedWidth);
+                differencePix--;
+
+                if (++i == _pictures.Count)
+                {
+                    i = 0;
+                }
+            }
+        }
+
+        private void ResizeImages(int height)
+        {
+            foreach (var picture in _pictures)
+            {
+                picture.ResizeWithHeight(height);
+            }
+        }
+
+        public override int GetResizedHeight()
+        {
+            return _pictures.First().GetResizedHeight();
+        }
+
+        public override int GetResizedWidth()
+        {
+            return _pictures.Sum(x => x.GetResizedWidth());
+        }
+
+        public override void ResizeWithHeight(int height)
+        {
+            var width = GetWidthByHeight(height);
+            ResizeImages(height);
+            CorrectImagesToFitArea(width);
+        }
+
+        public override void ResizeWithWidth(int width)
+        {
+            var height = GetHeightByWidth(width);
+            ResizeImages(height);
+            CorrectImagesToFitArea(width);
+        }
+
+        public override void SetResizedHeight(int height)
+        {
+            var width = GetWidthByHeight(height);
+            ResizeImages(height);
+            CorrectImagesToFitArea(width);
+        }
+
+        public override void SetResizedWidth(int width)
+        {
+            var height = GetHeightByWidth(width);
+            ResizeImages(height);
+            CorrectImagesToFitArea(width);
+        }
+    }
 }

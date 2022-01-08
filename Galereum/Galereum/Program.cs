@@ -8,25 +8,50 @@ namespace Galereum
 	{
 		static void Main(string[] args)
 		{
+			Test1();
+		}
+
+		private static void Test3()
+        {
+			var column = new Column();
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
+
+			for (int i = 1000; i <= 1030; i++)
+			{
+				column.GetBitmapWithHeight(i).Save($"{i}.jpg", ImageFormat.Jpeg);
+			}
+		}
+
+		private static void Test2()
+        {
 			var row = new Row();
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
-			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));			
+			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 
-			for (int i = 1000; i<=1030; i++)
-            {
+			for (int i = 1000; i <= 1030; i++)
+			{
 				row.GetBitmapWithWidth(i).Save($"{i}.jpg", ImageFormat.Jpeg);
-            }
+			}
 		}
 
-		private void Test1()
+		private static void Test1()
         {
 			var column1 = new Column();
 			column1.Add(new Picture(Image.FromFile("Images\\1.jpg")));

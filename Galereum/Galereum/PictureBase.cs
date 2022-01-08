@@ -46,5 +46,19 @@ namespace Galereum
 
 			return destImage;
 		}
-	}
+
+		public abstract int GetResizedHeight();
+
+		public abstract int GetResizedWidth();
+
+		public abstract void ResizeWithHeight(int height);
+
+		public abstract void ResizeWithWidth(int width);
+
+		public abstract void SetResizedHeight(int height);
+
+		public abstract void SetResizedWidth(int width);
+
+		public abstract Bitmap GetResizedBitmap();
+    }
 }

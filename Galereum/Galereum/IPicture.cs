@@ -10,6 +10,14 @@ namespace Galereum
 		/// <returns></returns>
 		float GetRatio();
 
+		int GetResizedHeight();
+		int GetResizedWidth();
+		void SetResizedHeight(int height);
+		void SetResizedWidth(int width);
+		void ResizeWithHeight(int height);
+		void ResizeWithWidth(int width);
+		Bitmap GetResizedBitmap();
+
 		/// <summary>
 		/// Возвращает Bitmap заданной высоты
 		/// </summary>
