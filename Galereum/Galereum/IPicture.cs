@@ -16,18 +16,18 @@ namespace Galereum
 		void SetResizedWidth(int width);
 		void ResizeWithHeight(int height);
 		void ResizeWithWidth(int width);
-		Bitmap GetResizedBitmap();
+		Bitmap GetResizedBitmap(Padding padding);
 
 		/// <summary>
 		/// Возвращает Bitmap заданной высоты
 		/// </summary>
 		/// <param name="height">Высота</param>
-		Bitmap GetBitmapWithHeight(int height);
+		Bitmap GetBitmapWithHeight(int height, Padding padding);
 
 		/// <summary>
 		/// Возвращает Bitmap заданной ширины
 		/// </summary>
 		/// <param name="width">Ширина</param>
-		Bitmap GetBitmapWithWidth(int width);
+		Bitmap GetBitmapWithWidth(int width, Padding padding);
 	}
 }

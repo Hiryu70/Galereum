@@ -6,9 +6,9 @@ namespace Galereum
 {
 	public abstract class PictureBase : IPicture
 	{
-		public abstract Bitmap GetBitmapWithHeight(int height);
+		public abstract Bitmap GetBitmapWithHeight(int height, Padding padding);
 
-		public abstract Bitmap GetBitmapWithWidth(int width);
+		public abstract Bitmap GetBitmapWithWidth(int width, Padding padding);
 
 		public abstract float GetRatio();
 
@@ -22,10 +22,10 @@ namespace Galereum
 			return (int)(width / GetRatio());
 		}
 
-		protected static Bitmap ResizeImage(Image image, int width, int height)
+		protected static Bitmap ResizeImage(Image image, int width, int height, Padding padding)
 		{
-			var destRect = new Rectangle(0, 0, width, height);
-			var destImage = new Bitmap(width, height);
+			var destRect = new Rectangle(0, 0, width - padding.Right - padding.Left, height - padding.Top - padding.Bottom);
+			var destImage = new Bitmap(width - padding.Right - padding.Left, height - padding.Top - padding.Bottom);
 
 			destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
@@ -59,6 +59,6 @@ namespace Galereum
 
 		public abstract void SetResizedWidth(int width);
 
-		public abstract Bitmap GetResizedBitmap();
+		public abstract Bitmap GetResizedBitmap(Padding padding);
     }
 }

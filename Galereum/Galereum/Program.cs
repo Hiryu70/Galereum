@@ -9,6 +9,8 @@ namespace Galereum
 		static void Main(string[] args)
 		{
 			Test1();
+			Test2();
+			Test3();
 		}
 
 		private static void Test3()
@@ -25,9 +27,9 @@ namespace Galereum
 			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
 			column.Add(new Picture(Image.FromFile("Images\\2-1.jpg")));
 
-			for (int i = 1000; i <= 1030; i++)
+			for (int i = 1000; i <= 1020; i++)
 			{
-				column.GetBitmapWithHeight(i).Save($"{i}.jpg", ImageFormat.Jpeg);
+				column.GetBitmapWithHeight(i, new Padding(0, 0, 0, 3)).Save($"col_{i}.jpg", ImageFormat.Jpeg);
 			}
 		}
 
@@ -45,9 +47,9 @@ namespace Galereum
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 			row.Add(new Picture(Image.FromFile("Images\\1-2.jpg")));
 
-			for (int i = 1000; i <= 1030; i++)
+			for (int i = 1000; i <= 1020; i++)
 			{
-				row.GetBitmapWithWidth(i).Save($"{i}.jpg", ImageFormat.Jpeg);
+				row.GetBitmapWithWidth(i, new Padding(0, 0, 0, 3)).Save($"row_{i}.jpg", ImageFormat.Jpeg);
 			}
 		}
 
@@ -79,7 +81,7 @@ namespace Galereum
 			column3.Add(row);
 			column3.Add(row2);
 
-			column3.GetBitmapWithWidth(1500).Save("result.jpg", ImageFormat.Jpeg);
+			column3.GetBitmapWithWidth(1500, new Padding(0, 0, 0, 3)).Save("result.jpg", ImageFormat.Jpeg);
 		}
 	}
 }

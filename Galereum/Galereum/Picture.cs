@@ -15,22 +15,22 @@ namespace Galereum
 			_resizedWidth = image.Width;
 		}
 
-		public override Bitmap GetBitmapWithHeight(int height)
+		public override Bitmap GetBitmapWithHeight(int height, Padding padding)
 		{
 			var scale = (float)height / _image.Height;
 			var resizedHeight = height;
 			var resizedWidth = _image.Width * scale;
 
-			return ResizeImage(_image, (int)resizedWidth, resizedHeight);
+			return ResizeImage(_image, (int)resizedWidth, resizedHeight, padding);
 		}
 
-		public override Bitmap GetBitmapWithWidth(int width)
+		public override Bitmap GetBitmapWithWidth(int width, Padding padding)
 		{
 			var scale = (float)width / _image.Width;
 			var resizedHeight = _image.Height * scale;
 			var resizedWidth = width;
 
-			return ResizeImage(_image, resizedWidth, (int)resizedHeight);
+			return ResizeImage(_image, resizedWidth, (int)resizedHeight, padding);
 		}
 
 		public override float GetRatio()
@@ -38,9 +38,9 @@ namespace Galereum
 			return (float)_image.Width / _image.Height;
 		}
 
-        public override Bitmap GetResizedBitmap()
+        public override Bitmap GetResizedBitmap(Padding padding)
         {
-			return ResizeImage(_image, _resizedWidth, _resizedHeight);
+			return ResizeImage(_image, _resizedWidth, _resizedHeight, padding);
         }
 
         public override int GetResizedHeight()

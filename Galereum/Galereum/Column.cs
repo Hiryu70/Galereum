@@ -10,23 +10,28 @@ namespace Galereum
 			return 1 / _pictures.Sum(x => 1 / x.GetRatio());
 		}
 
-        protected override Bitmap GetCollectionBitmap(int width, int height)
+        protected override Bitmap GetCollectionBitmap(int width, int height, Padding padding)
         {
             ResizeImages(width);
 
             CorrectImagesToFitArea(height);
 
-            return DrawPictures(width, height);
+            return DrawPictures(width, height, padding);
         }
 
-        protected override void DrawImage(Graphics g, Bitmap resizedImage, int localCoord)
+        protected override int GetStartCoord(Padding padding)
         {
-            g.DrawImage(resizedImage, 0, localCoord);
+            return padding.Top;
         }
 
-        protected override int ChangeCoord(Bitmap resizedImage, int localCoord)
+        protected override void DrawImage(Graphics g, Bitmap resizedImage, int localCoord, Padding padding)
         {
-            return localCoord += resizedImage.Height;
+            g.DrawImage(resizedImage, padding.Left, localCoord);
+        }
+
+        protected override int ChangeCoord(Bitmap resizedImage, int localCoord, Padding padding)
+        {
+            return localCoord += resizedImage.Height + padding.Bottom + padding.Top;
         }
 
         private void CorrectImagesToFitArea(int height)
